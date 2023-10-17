@@ -1,5 +1,6 @@
 import pygame as pg
 import chess_engine
+from smartmovefinder import AIPlayer
 from move import Move
 
 WIDTH = 512      # pixels along width of board
@@ -67,8 +68,9 @@ def main():
     initialize_images()
     on = True
     player_one = True
-    player_two = True
+    player_two = False
     undo_last_move = False
+    aiplayer = AIPlayer()
     while on:
         human_turn = (engine.white_to_move and player_one) or (not engine.white_to_move and player_two)
         for e in pg.event.get():
@@ -76,7 +78,7 @@ def main():
             if e.type == pg.QUIT:
                 on = False
             elif e.type == pg.MOUSEBUTTONDOWN:
-                if on:
+                if on and human_turn:
                     loc = pg.mouse.get_pos()
                     r,c = [loc[1]//BLOCK,loc[0]//BLOCK]
                     if move_stack == (r,c):
@@ -104,6 +106,12 @@ def main():
                     engine.undo_last_move()
                     undo_last_move = True
     
+        if on and (not human_turn):
+            startrow,startcol,endrow,endcol = aiplayer.get_best_move(engine.board,engine.white_to_move)
+            AIMove = Move((startrow,startcol),(endrow,endcol),engine.board)
+            engine.print_move(AIMove)
+            engine.make_move(AIMove)
+            move_flag = True
 
         if move_flag:
             valid_moves,num_checks = engine.get_valid_moves()
@@ -116,6 +124,8 @@ def main():
         draw_ops(display,engine,valid_moves,move_stack)
         clock.tick(FPS)
         pg.display.flip()
+
+    aiplayer.update_cached_moves()
 
 
 if __name__ == "__main__":

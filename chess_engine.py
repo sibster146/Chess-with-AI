@@ -1,5 +1,6 @@
 import numpy as np
 from piece_factory import PieceFactory
+import subprocess
 
 piece_value = {
     'Q': 10,
@@ -135,10 +136,5 @@ class Engine:
             self.undo_last_move()
             self.white_to_move = not(self.white_to_move)
         return [moves,num_check]
-
-
-
-            
-
-
-        
+    
+  
