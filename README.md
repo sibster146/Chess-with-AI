@@ -46,6 +46,37 @@ git clone repo into local repository. Install dependencies from requirements.txt
 
     main()- starts the iteration of the game. All above functions are called in here.
 
+*move.py*- defines the move class object
+
+    __init__()- attributes are the starting and ending positions, the piece being moved, and any potentially captured pieces
+
+    __eq__()- two moves are considered equal if the start and ending positions are the same
+
+    copy()- returns object
+
+*piece.py*- defines the class objects for knight, rook, bishop, queen, king, and pawn
+
+    Every class has get_possible_moves(), which returns the list of possible moves for that piece. The king has some extra functions.
+
+    get_pins()- return the number of friendly pieces that are currently preventing check (we cannot move these pieces)
+    
+    is_check_by_direc()- checks if the king by one straight direction
+
+    is_check_by _bishop()- checks if the king is in check by a bishop
+
+    is_check_by_ortho_diag()- calls is_check_by_direc() with directions up, down, diagonal left and right
+
+    in_check_pos()- calls is_check_by_ortho_diag and is_check_by_bishop()
+
+*piece_factory.py*- creates piece classes
+
+    PieceFactory class has one method. create_piece() which creates pieces
+
+
+
+
+
+
     
 
     
