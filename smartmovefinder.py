@@ -22,7 +22,7 @@ class AIPlayer:
     def get_stockfish_move(self,board_string):
         # Start Stockfish engine and send FEN position
         stockfish = subprocess.Popen(
-            "C:\\Users\\sibys\\OneDrive\\Documents\\jobs\\personal_projects\\Chess-with-AI-main\\stockfish\\stockfish-windows-x86-64-modern.exe",
+            "Chess-with-AI\stockfish",
             universal_newlines=True,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
