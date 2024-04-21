@@ -72,6 +72,16 @@ git clone repo into local repository. Install dependencies from requirements.txt
 
     PieceFactory class has one method. create_piece() which creates pieces
 
+*smartmovefinder.py*- defines the AI player class that goes against the human player
+
+    __init__()- loads the cached_moves.pkl file
+
+    get_best_move()- returns the best move to do in a given game state. Parses the game state in a format that works with get_stockfish_move() and Calls get_stockfish_move() to do this
+
+    get_stockfish_move()- takes the game state and returns the best move
+
+    
+
 
 
 
